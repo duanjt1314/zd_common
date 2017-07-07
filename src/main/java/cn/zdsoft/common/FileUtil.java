@@ -2,13 +2,18 @@ package cn.zdsoft.common;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import javax.management.RuntimeErrorException;
 
 /**
  * 文件管理，快速读写文件
@@ -26,8 +31,8 @@ public class FileUtil {
 	 */
 	public static String ReadAllString(String url) {
 		try {
-			byte[] bs= ReadAllByte(url);
-			return new String(bs,"UTF-8");
+			byte[] bs = ReadAllByte(url);
+			return new String(bs, "UTF-8");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,15 +50,15 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("resource")
-	public static byte[] ReadAllByte(String url) throws IOException {		
-		java.io.File file = new java.io.File(url,"");
+	public static byte[] ReadAllByte(String url) throws IOException {
+		java.io.File file = new java.io.File(url, "");
 		FileInputStream fis = new FileInputStream(file);
-		
+
 		long len = file.length();
 		byte[] bytes = new byte[(int) len];
 		fis.read(bytes, 0, bytes.length);
 		fis.close();
-		return bytes;		
+		return bytes;
 	}
 
 	/**
@@ -67,7 +72,7 @@ public class FileUtil {
 	 */
 	public static void WriteAllString(String url, String content) throws IOException {
 		FileOutputStream fos = new FileOutputStream(url);
-		OutputStreamWriter osw=new OutputStreamWriter(fos, "UTF-8");
+		OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 		osw.write(content);
 		osw.close();
 		fos.close();
@@ -113,9 +118,9 @@ public class FileUtil {
 		for (int i = 0; i < files.length; i++) {
 			// 删除子文件
 			if (files[i].isFile()) {
-				flag=new File(files[i].getAbsolutePath()).delete();
+				flag = new File(files[i].getAbsolutePath()).delete();
 				if (!flag) {
-					System.out.println("文件删除失败:["+files[i].getAbsolutePath()+"] 可能是流没有正确关闭");
+					System.out.println("文件删除失败:[" + files[i].getAbsolutePath() + "] 可能是流没有正确关闭");
 					break;
 				}
 			}
@@ -123,7 +128,7 @@ public class FileUtil {
 			else {
 				flag = DeleteDir(files[i].getAbsolutePath());
 				if (!flag) {
-					System.out.println("文件夹删除失败:"+files[i].getAbsolutePath());
+					System.out.println("文件夹删除失败:" + files[i].getAbsolutePath());
 					break;
 				}
 			}
@@ -141,4 +146,85 @@ public class FileUtil {
 			return false;
 		}
 	}
+
+	/**
+	 * 查找指定目录下包含关键字的所有文件信息
+	 * 
+	 * @param dirName
+	 *            目录全路径
+	 * @param keyWord
+	 *            关键字
+	 * @param ignoreCase
+	 *            是否忽略大小写
+	 * @return
+	 */
+	public static File[] GetFiles(String dirName, String keyWord, boolean ignoreCase) {
+		File file = new File(dirName);
+		if (!file.isDirectory()) {
+			throw new RuntimeException("目录:" + dirName + " 不存在");
+		}
+
+		File[] files = file.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File f) {
+				if (ignoreCase) {
+					// 判断是否包含关键字
+					if (f.getName().toLowerCase().indexOf(keyWord.toLowerCase()) >= 0) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					// 判断是否包含关键字
+					if (f.getName().indexOf(keyWord) >= 0) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+		});
+
+		return files;
+	}
+
+	/**
+	 * 查找指定目录下包含关键字的所有文件信息(不会忽略大小写)
+	 * 
+	 * @param dirName
+	 *            目录全路径
+	 * @param keyWord
+	 *            关键字
+	 * @return
+	 */
+	public static File[] GetFiles(String dirName, String keyWord) {
+		return GetFiles(dirName, keyWord, false);
+	}
+
+	/**
+	 * 根据正则表达式筛选文件
+	 * 
+	 * @param dirName
+	 *            目录全路径
+	 * @param regex
+	 *            正则表达式
+	 * @return
+	 */
+	public static File[] GetFilesRegex(String dirName, String regex) {
+		File file = new File(dirName);
+		if (!file.isDirectory()) {
+			throw new RuntimeException("目录:" + dirName + " 不存在");
+		}
+
+		File[] files = file.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File f) {
+				// 判断是否验证通过
+				return RegexUtil.Regex(regex, f.getName());
+			}
+		});
+
+		return files;
+	}
+
 }
