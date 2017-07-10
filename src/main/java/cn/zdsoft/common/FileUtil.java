@@ -202,6 +202,59 @@ public class FileUtil {
 	}
 
 	/**
+	 * 根据给定的关键字数组查找指定目录下的文件，只要在关键字数组中有一个关键字满足条件就返回该文件，同时可配置是否忽略大小写
+	 * 
+	 * @param dirName
+	 *            目录全路径
+	 * @param keyWords
+	 *            关键字数组
+	 * @param ignoreCase
+	 *            是否忽略大小写
+	 * @return
+	 */
+	public static File[] GetFiles(String dirName, String[] keyWords, boolean ignoreCase) {
+		File file = new File(dirName);
+		if (!file.isDirectory()) {
+			throw new RuntimeException("目录:" + dirName + " 不存在");
+		}
+
+		File[] files = file.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File f) {
+				for (String keyWord : keyWords) {
+					if (ignoreCase) {
+						// 判断是否包含关键字
+						if (f.getName().toLowerCase().indexOf(keyWord.toLowerCase()) >= 0) {
+							return true;
+						}
+					} else {
+						// 判断是否包含关键字
+						if (f.getName().indexOf(keyWord) >= 0) {
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+		});
+
+		return files;
+	}
+
+	/**
+	 * 根据给定的关键字数组查找指定目录下的文件，只要在关键字数组中有一个关键字满足条件就返回该文件(不会忽略大小写)
+	 * 
+	 * @param dirName
+	 *            目录全路径
+	 * @param keyWords
+	 *            关键字数组
+	 * @return
+	 */
+	public static File[] GetFiles(String dirName, String[] keyWords) {
+		return GetFiles(dirName, keyWords, false);
+	}
+
+	/**
 	 * 根据正则表达式筛选文件
 	 * 
 	 * @param dirName
