@@ -33,7 +33,7 @@ public class FileUtilTest {
 	
 	@Test
 	public void testCopyFile() throws IOException {
-		FileUtil.CopyFile("f:\\Code.txt", "F:\\迅雷下载\\123.txt");
+		FileUtil.CopyFile("f:\\Code.txt", "F:\\abc\\123.txt");
 		
 	}
 }
