@@ -3,6 +3,7 @@ package cn.zdsoft.common;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -27,6 +28,12 @@ public class FileUtilTest {
 		for (File file : fs) {
 			System.out.println(file.getName());
 		}
+		
+	}
+	
+	@Test
+	public void testCopyFile() throws IOException {
+		FileUtil.CopyFile("f:\\Code.txt", "F:\\迅雷下载\\123.txt");
 		
 	}
 }

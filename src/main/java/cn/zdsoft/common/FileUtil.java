@@ -279,20 +279,42 @@ public class FileUtil {
 
 		return files;
 	}
-	
+
 	/**
 	 * 获取指定目录下的所有文件
+	 * 
 	 * @param dirName
 	 * @return
 	 */
-	public static File[] GetFiles(String dirName){
+	public static File[] GetFiles(String dirName) {
 		File file = new File(dirName);
 		if (!file.isDirectory()) {
 			throw new RuntimeException("目录:" + dirName + " 不存在");
 		}
-		
+
 		return file.listFiles();
 	}
-			
+
+	/**
+	 * 文件移动
+	 * 
+	 * @param fileName
+	 *            源文件全路径
+	 * @param targetFileName
+	 *            目标文件全路径
+	 * @throws IOException 
+	 */
+	public static void CopyFile(String fileName, String targetFileName) throws IOException {
+		File oldFile = new File(fileName);
+		File newFile = new File(targetFileName);
+
+		FileInputStream in = new FileInputStream(oldFile);
+		FileOutputStream out = new FileOutputStream(newFile);
+
+		byte[] buffer = new byte[2097152];
+		while ((in.read(buffer)) != -1) {
+			out.write(buffer);
+		}
+	}
 
 }
