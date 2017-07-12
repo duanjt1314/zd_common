@@ -279,5 +279,20 @@ public class FileUtil {
 
 		return files;
 	}
+	
+	/**
+	 * 获取指定目录下的所有文件
+	 * @param dirName
+	 * @return
+	 */
+	public static File[] GetFiles(String dirName){
+		File file = new File(dirName);
+		if (!file.isDirectory()) {
+			throw new RuntimeException("目录:" + dirName + " 不存在");
+		}
+		
+		return file.listFiles();
+	}
+			
 
 }
