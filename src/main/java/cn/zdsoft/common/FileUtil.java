@@ -6,6 +6,7 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -76,6 +77,13 @@ public class FileUtil {
 		osw.write(content);
 		osw.close();
 		fos.close();
+		
+		/**
+		 * 备忘录,也可以使用FileWriter来实现
+		 */
+		// FileWriter writer=new FileWriter("f:\\aa.txt");
+		// writer.write("追加内容\r\n");
+		// writer.close();
 	}
 
 	/**
