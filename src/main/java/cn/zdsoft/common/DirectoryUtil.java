@@ -20,6 +20,6 @@ public class DirectoryUtil {
 		if(file.isFile()||file.exists()){
 			return;
 		}
-		file.mkdir();
+		file.mkdirs();
 	}
 }

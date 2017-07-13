@@ -148,6 +148,16 @@ public class FileUtil {
 	}
 
 	/**
+	 * 删除文件
+	 * @param fileName 文件全路径
+	 * @return
+	 */
+	public static boolean DeleteFile(String fileName){
+		File file=new File(fileName);
+		return file.delete();
+	}
+	
+	/**
 	 * 查找指定目录下包含关键字的所有文件信息
 	 * 
 	 * @param dirName
@@ -315,6 +325,9 @@ public class FileUtil {
 		while ((in.read(buffer)) != -1) {
 			out.write(buffer);
 		}
+		
+		in.close();
+		out.close();
 	}
 
 }
