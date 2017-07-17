@@ -5,15 +5,19 @@ package cn.zdsoft.common.base;
  * @author 段江涛
  * @date 2017-07-17
  */
-public abstract class ThreadBase extends Thread {
+public class ThreadBase extends Thread {
 	/**
 	 * 是否正在运行
 	 */
 	protected boolean running;
 
-	public abstract void Start();
+	public void Start() {
+		running = true;
+	}
 
-	public abstract void Stop();
+	public void Stop() {
+		running = false;
+	}
 
 	/**
 	 * 程序暂停多少秒
