@@ -1,7 +1,6 @@
 package cn.zdsoft.common;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,7 +57,7 @@ public class ZipUtil {
 	 * @param containsDir 是否包含文件的目录
 	 * @throws IOException
 	 */
-	public static void Zip(List<File> files, String zipDir, String zipName,Boolean containsDir) throws IOException {
+	public static void Zip(List<File> files, String zipDir, String zipName, Boolean containsDir) throws IOException {
 		// 判断目标目录并创建
 		File zipDirFile = new File(zipDir);
 		if (!zipDirFile.exists() || !zipDirFile.isDirectory()) {
@@ -67,7 +66,7 @@ public class ZipUtil {
 
 		String zipPath = zipDir + File.separator + zipName;
 		ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipPath));
-		
+
 		for (File file : files) {
 			if (file.isDirectory()) {
 				if (containsDir == true) {
@@ -76,10 +75,17 @@ public class ZipUtil {
 					Zip(file.getPath() + File.separator, file, out);
 				}
 			} else {
-				Zip(file.getParent(), file, out);
+				if (containsDir == true) {
+					String baseDir = file.getParent();
+					if (file.getParentFile() != null)
+						baseDir = file.getParentFile().getParent();
+					Zip(baseDir, file, out);
+				} else {
+					Zip(file.getParent(), file, out);
+				}
 			}
 		}
-		
+
 		out.close();
 	}
 
@@ -94,6 +100,10 @@ public class ZipUtil {
 			/**
 			 * 1.加载名称，相对路径 2.写入数据，需要绝对路径
 			 */
+			if (!baseDir.substring(baseDir.length() - 1).equals("\\")) {
+				//如果不是以"\"结尾则加上"\"
+				baseDir += "\\";
+			}
 			System.out.println("准备压缩:" + file.getPath());
 			out.putNextEntry(new ZipEntry(file.getPath().replace(baseDir, "")));
 			out.write(cn.zdsoft.common.FileUtil.ReadAllByte(file.getPath()));
