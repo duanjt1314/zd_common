@@ -1,10 +1,12 @@
 package cn.zdsoft.common;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
@@ -20,14 +22,10 @@ public class ZipUtil {
 	/**
 	 * 压缩zip文件
 	 * 
-	 * @param url
-	 *            压缩源目录或文件
-	 * @param zipDir
-	 *            压缩目标zip目录
-	 * @param zipName
-	 *            压缩目标zip名称
-	 * @param containsDir
-	 *            是否包含目录，当url为目录时有效
+	 * @param url 压缩源目录或文件
+	 * @param zipDir 压缩目标zip目录
+	 * @param zipName 压缩目标zip名称
+	 * @param containsDir 是否包含目录，当url为目录时有效
 	 * @throws IOException
 	 */
 	public static void Zip(String url, String zipDir, String zipName, Boolean containsDir) throws IOException {
@@ -49,6 +47,39 @@ public class ZipUtil {
 		} else {
 			Zip(file.getParent(), file, out);
 		}
+		out.close();
+	}
+
+	/**
+	 * 将指定的文件/文件夹列表集合压缩到指定目录
+	 * @param files 待压缩文件的集合
+	 * @param zipDir 压缩后的目录
+	 * @param zipName 压缩后的文件名
+	 * @param containsDir 是否包含文件的目录
+	 * @throws IOException
+	 */
+	public static void Zip(List<File> files, String zipDir, String zipName,Boolean containsDir) throws IOException {
+		// 判断目标目录并创建
+		File zipDirFile = new File(zipDir);
+		if (!zipDirFile.exists() || !zipDirFile.isDirectory()) {
+			zipDirFile.mkdir();// 创建目录
+		}
+
+		String zipPath = zipDir + File.separator + zipName;
+		ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipPath));
+		
+		for (File file : files) {
+			if (file.isDirectory()) {
+				if (containsDir == true) {
+					Zip(file.getParent(), file, out);
+				} else {
+					Zip(file.getPath() + File.separator, file, out);
+				}
+			} else {
+				Zip(file.getParent(), file, out);
+			}
+		}
+		
 		out.close();
 	}
 
