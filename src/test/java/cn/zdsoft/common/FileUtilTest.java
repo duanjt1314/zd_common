@@ -33,7 +33,11 @@ public class FileUtilTest {
 	
 	@Test
 	public void testCopyFile() throws IOException {
-		FileUtil.CopyFile("f:\\Code.txt", "F:\\abc\\123.txt");
-		
+		//FileUtil.CopyFile("f:\\Code.txt", "F:\\abc\\123.txt");		
+	}
+	
+	@Test
+	public void testDeleteDir(){
+		//FileUtil.DeleteDir("F:\\Log2017\\OMSystem");
 	}
 }
