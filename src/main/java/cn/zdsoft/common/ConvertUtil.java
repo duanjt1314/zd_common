@@ -19,7 +19,7 @@ public class ConvertUtil {
 			return classType.cast(Double.parseDouble(obj.toString()));
 		} else {
 			// 默认 字符串
-			return classType.cast(obj);
+			return classType.cast(obj);			
 		}
 	}
 }

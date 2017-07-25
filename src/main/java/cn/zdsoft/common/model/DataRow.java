@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 /**
  * 数据行
  * @author Administrator
- *
+ * HashMap是无序的，LinkedHashMap是有序的(取数据时先插入先取出)
  */
 public class DataRow extends LinkedHashMap<String, Object>{
 
