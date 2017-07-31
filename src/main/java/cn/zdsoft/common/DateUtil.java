@@ -1,7 +1,9 @@
 package cn.zdsoft.common;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * 时间帮助类，统一使用java.util.date
@@ -35,5 +37,19 @@ public class DateUtil {
 		String format = "yyyy-MM-dd HH:mm:ss";
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		return sdf.format(date);
+	}
+
+	/**
+	 * 给指定日期增加指定天数，可以是负数
+	 * @param date
+	 * @param day
+	 * @return
+	 */
+	public static Date AddDay(Date date, int day) {
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.add(calendar.DATE, day);// 把日期往后增加一天.整数往后推,负数往前移动
+		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+		return date;
 	}
 }
