@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class XmlUtilTest {
 
-	@Test
+	
 	public void testGetXmlElement() throws DocumentException {
 		SAXReader reader = new SAXReader();
 		File f = new File("d:\\config.xml");
@@ -25,7 +25,7 @@ public class XmlUtilTest {
 
 	}
 
-	@Test
+	
 	public void testGetXmlAttr() throws DocumentException {
 		SAXReader reader = new SAXReader();
 		File f = new File("d:\\config.xml");
@@ -37,7 +37,7 @@ public class XmlUtilTest {
 		System.out.println("id=" + id);
 	}
 
-	@Test
+	
 	public void testGetXmlPath() throws DocumentException {
 		SAXReader reader = new SAXReader();
 		File f = new File("d:\\config.xml");

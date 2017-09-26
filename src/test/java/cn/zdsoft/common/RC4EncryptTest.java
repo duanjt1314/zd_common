@@ -14,7 +14,7 @@ public class RC4EncryptTest {
 	 * 解密
 	 * @throws Exception 
 	 */
-	@Test
+	
 	public void testDecrypt() throws Exception {
 //		String content="我是中国人";
 //		byte[] bs=content.getBytes("utf-8");
@@ -32,7 +32,7 @@ public class RC4EncryptTest {
 	 * 加密
 	 * @throws Exception 
 	 */
-	@Test
+	
 	public void testEncrypt() throws Exception {
 		String content="我是中国人";
 		byte[] bs=content.getBytes("utf-8");

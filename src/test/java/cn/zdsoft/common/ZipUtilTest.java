@@ -12,7 +12,6 @@ import org.junit.Test;
 public class ZipUtilTest {
 
 
-	@Test
 	public void testZip() throws IOException {
 		File file1=new File("F:\\360云盘\\20160511_101608.jpg");
 		File file2=new File("F:\\360云盘\\Github帐号密码.txt");

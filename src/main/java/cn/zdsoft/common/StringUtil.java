@@ -122,4 +122,18 @@ public class StringUtil {
 
 		return sb.toString();
 	}
+	
+	/**
+	 * 去掉字符串末尾指定的字节
+	 * @param content
+	 * @param cha
+	 * @return
+	 */
+	public static String ReplaceLastStr(String content,char cha){
+		String c=new String(new char[]{cha});
+		while(content.substring(content.length()-1).equals(c)){
+			content=content.substring(0,content.length()-1);
+		}
+		return content;
+	}
 }
