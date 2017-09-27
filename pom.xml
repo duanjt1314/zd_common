@@ -5,7 +5,21 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.zdsoft</groupId>
 	<artifactId>zd_common</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>2.0.1</version>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>zd_common-snapshot</id>
+			<name>zd_common</name>
+			<url>http://172.23.88.116:27030/nexus/content/repositories/snapshots/</url>
+			<uniqueVersion>true</uniqueVersion>
+		</snapshotRepository>
+		<repository>
+			<id>zd_common-release</id>
+			<name>zd_common</name>
+			<url>http://172.23.88.116:27030/nexus/content/repositories/releases/</url>
+		</repository>
+	</distributionManagement>
 
 	<build>
 		<finalName>zd_common</finalName>
