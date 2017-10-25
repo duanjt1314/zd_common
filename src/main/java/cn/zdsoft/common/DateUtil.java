@@ -52,4 +52,20 @@ public class DateUtil {
 		date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
 		return date;
 	}
+	
+	/**
+	 * 给指定日期增加指定月数，可以是负数
+	 * @param date
+	 * @param month
+	 * @return
+	 */
+	public static Date AddMonth(Date date, int month) {
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.add(calendar.MONTH, month);
+		date = calendar.getTime(); 
+		return date;
+	}
+	
+	
 }

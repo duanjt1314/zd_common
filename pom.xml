@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.zdsoft</groupId>
 	<artifactId>zd_common</artifactId>
-	<version>2.0.1</version>
+	<version>2.0.2</version>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -55,6 +55,11 @@
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.58</version>
 		</dependency>
 	</dependencies>
 </project>
