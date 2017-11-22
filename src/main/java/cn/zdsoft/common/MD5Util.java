@@ -17,7 +17,7 @@ public class MD5Util {
 		MessageDigest md5 = null;
 		try {
 			md5 = MessageDigest.getInstance("MD5");
-			byte[] byteArray = content.getBytes("UTF-8");
+			byte[] byteArray = content.getBytes("gb2312");
 			byte[] md5Bytes = md5.digest(byteArray);
 			StringBuffer hexValue = new StringBuffer();
 			for (int i = 0; i < md5Bytes.length; i++) {
@@ -28,7 +28,8 @@ public class MD5Util {
 				hexValue.append(Integer.toHexString(val));
 			}
 			String result = hexValue.toString();
-			result = result.substring(0, result.length() - 2).toUpperCase();
+			//result = result.substring(0, result.length() - 2).toUpperCase();
+			result = result.toUpperCase();
 			return result;
 		} catch (Exception e) {
 			System.out.println(e.toString());
