@@ -100,9 +100,10 @@ public class ZipUtil {
 			/**
 			 * 1.加载名称，相对路径 2.写入数据，需要绝对路径
 			 */
-			if (!baseDir.substring(baseDir.length() - 1).equals("\\")) {
+			String se=File.separator;//文件分隔符，区分windows和linux
+			if (!baseDir.substring(baseDir.length() - 1).equals(se)) {
 				//如果不是以"\"结尾则加上"\"
-				baseDir += "\\";
+				baseDir += se;
 			}
 			System.out.println("准备压缩:" + file.getPath());
 			out.putNextEntry(new ZipEntry(file.getPath().replace(baseDir, "")));
