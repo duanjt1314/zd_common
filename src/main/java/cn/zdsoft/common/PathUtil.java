@@ -17,6 +17,19 @@ public class PathUtil {
 		}
 		return url.substring(index + 1);
 	}
+	
+	/**
+	 * 获取文件后缀名
+	 * @param url
+	 * @return
+	 */
+	public static String GetFileExtension(String url){
+		int index = url.lastIndexOf('.');
+		if(index==-1){
+			return "";
+		}
+		return url.substring(index);
+	}
 
 	/**
 	 * 获取文件名称

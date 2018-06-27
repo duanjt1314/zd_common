@@ -337,5 +337,19 @@ public class FileUtil {
 		in.close();
 		out.close();
 	}
+	
+	/**
+	 * 判断文件是否被占用 被占用返回true
+	 * @param file
+	 * @return 
+	 */
+	public static boolean isFileInUse(File file) {
+		if (file.renameTo(file)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 
 }
