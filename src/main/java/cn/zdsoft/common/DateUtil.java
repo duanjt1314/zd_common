@@ -1,5 +1,6 @@
 package cn.zdsoft.common;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,6 +66,18 @@ public class DateUtil {
 		calendar.add(calendar.MONTH, month);
 		date = calendar.getTime(); 
 		return date;
+	}
+	
+	/**
+	 * 将日期字符串按照一定的格式转换为日期对象Date
+	 * @param time
+	 * @param format
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date Parse(String time,String format) throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.parse(time);
 	}
 	
 	
