@@ -38,4 +38,20 @@ public class DataTable extends ArrayList<DataRow> {
 			return new String[] {};
 		}
 	}
+	
+	/**
+	 * 复制一个全新的DataTable
+	 * @return
+	 */
+	public DataTable copy(){
+		DataTable table=new DataTable();
+		for (DataRow dataRow : this) {
+			DataRow row=new DataRow();
+			for (String key : dataRow.keySet()) {
+				row.put(key, dataRow.get(key));
+			}
+			table.add(row);
+		}
+		return table;
+	}
 }

@@ -5,19 +5,23 @@ import java.text.ParseException;
 import java.util.Date;
 
 public class CheckSumId {
-	public static String GetId(String time, String... args) throws ParseException{
+	public static String GetId(String time, String... args) throws ParseException {
 		long timeParms;
 		if (time.length() == 14) {
-			timeParms = DateUtil.Parse(time,"yyyyMMddHHmmss").getTime();
+			timeParms = DateUtil.Parse(time, "yyyyMMddHHmmss").getTime();
 		} else if (time.length() == 10) {
 			timeParms = Long.parseLong(time);
 		} else {
 			timeParms = new Date().getTime() / 1000;
 		}
 
-		return String.valueOf(timeParms - 946656000) + String.valueOf(preCheckSum(args) & 262143 | 262144);
+		return GetId(timeParms, args);
 	}
-	
+
+	public static String GetId(long time, String... args) {
+		return String.valueOf(time - 946656000) + String.valueOf(preCheckSum(args) & 262143 | 262144);
+	}
+
 	private static int preCheckSum(String... inputs) {
 		MessageDigest md5;
 		try {
