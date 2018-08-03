@@ -21,6 +21,4 @@ public class DataRow extends LinkedHashMap<String, Object>{
 		return super.get(key.toString().toUpperCase());
 	}
 	
-	
-
 }

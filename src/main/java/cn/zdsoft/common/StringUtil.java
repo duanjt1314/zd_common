@@ -50,13 +50,13 @@ public class StringUtil {
 	 * @return
 	 */
 	public static DataTable String2Map(String str) {
-		DataTable list = new DataTable();
+		DataTable table = new DataTable();
 		if (IsNullOrEmpty(str)) {
-			return list;
+			return table;
 		}
 		// 定义列
 		List<String> columnNames = new ArrayList<String>();
-		String[] rows = str.split(System.lineSeparator());
+		String[] rows = str.split("\r\n");
 		if (rows.length > 0) {
 			// 实例化列
 			String[] cls = rows[0].split("\t");// 第一行代表标题
@@ -70,15 +70,15 @@ public class StringUtil {
 				DataRow hash = new DataRow();
 				cls = rows[i].split("\t");
 				for (int m = 0; m < cls.length; m++) {
-					if (!IsNullOrEmpty(cls[m].trim())) {
-						hash.put(columnNames.get(m), cls[m].trim());
-					}
+					hash.put(columnNames.get(m), cls[m].trim());
 				}
-				list.add(hash);
+				table.add(hash);
 			}
 		}
-
-		return list;
+		String[] col=new String[columnNames.size()];
+		columnNames.toArray(col);
+		table.setColumns(col);
+		return table;
 	}
 
 	/**
@@ -122,17 +122,17 @@ public class StringUtil {
 
 		return sb.toString();
 	}
-	
+
 	/**
 	 * 去掉字符串末尾指定的字节
 	 * @param content
 	 * @param cha
 	 * @return
 	 */
-	public static String ReplaceLastStr(String content,char cha){
-		String c=new String(new char[]{cha});
-		while(content.substring(content.length()-1).equals(c)){
-			content=content.substring(0,content.length()-1);
+	public static String ReplaceLastStr(String content, char cha) {
+		String c = new String(new char[] { cha });
+		while (content.substring(content.length() - 1).equals(c)) {
+			content = content.substring(0, content.length() - 1);
 		}
 		return content;
 	}
