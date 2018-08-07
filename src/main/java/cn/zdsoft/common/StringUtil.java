@@ -69,7 +69,7 @@ public class StringUtil {
 			for (int i = 1; i < rows.length; i++) {
 				DataRow hash = new DataRow();
 				cls = rows[i].split("\t");
-				for (int m = 0; m < cls.length; m++) {
+				for (int m = 0; m < columnNames.size(); m++) {
 					hash.put(columnNames.get(m), cls[m].trim());
 				}
 				table.add(hash);
