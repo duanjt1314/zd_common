@@ -105,7 +105,7 @@ public class StringUtil {
 
 		if (containTitle) {
 			// 标头
-			for (String key : list.get(0).keySet()) {
+			for (Object key : list.get(0).keySet()) {
 				sb.append(key + "\t");
 			}
 			sb.delete(sb.length() - 1, sb.length());// 删除最后一个制表符
@@ -113,7 +113,7 @@ public class StringUtil {
 		}
 
 		for (int i = 0; i < list.size(); i++) {
-			for (String key : list.get(i).keySet()) {
+			for (Object key : list.get(i).keySet()) {
 				sb.append(list.get(i).get(key) + "\t");
 			}
 			sb.delete(sb.length() - 1, sb.length());// 删除最后一个制表符

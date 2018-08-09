@@ -33,8 +33,8 @@ public class DataTable extends ArrayList<DataRow> {
 		if (this.columns == null) {
 			if (!isNullOrEmpty()) {
 				List<String> list = new ArrayList<String>();
-				for (String s : this.get(0).keySet()) {
-					list.add(s);
+				for (Object s : this.get(0).keySet()) {
+					list.add(s.toString());
 				}
 				this.columns = list.toArray(new String[list.size()]);
 			} else {
@@ -59,7 +59,7 @@ public class DataTable extends ArrayList<DataRow> {
 		DataTable table = new DataTable();
 		for (DataRow dataRow : this) {
 			DataRow row = new DataRow();
-			for (String key : dataRow.keySet()) {
+			for (Object key : dataRow.keySet()) {
 				row.put(key, dataRow.get(key));
 			}
 			table.add(row);
