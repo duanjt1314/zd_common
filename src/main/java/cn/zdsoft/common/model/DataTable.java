@@ -16,16 +16,16 @@ public class DataTable extends ArrayList<DataRow> {
 
 	public DataTable(){}
 	
-	public DataTable(List<Map> list){
-		for (Map map : list) {
+	public DataTable(List<Map<String,Object>> list){
+		for (Map<String,Object> map : list) {
 			DataRow row=new DataRow();
 			for (Object key : map.keySet()) {
-				row.put(key.toString(), map.get(key));
+				row.put(key, map.get(key));
 			}
 			this.add(row);
 		}
 	}
-	
+		
 	/**
 	 * 当前对象是否为空或数据条数为0
 	 * 
