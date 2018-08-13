@@ -12,7 +12,20 @@ import java.util.Map;
  */
 public class DataTable extends ArrayList<DataRow> {
 	private String[] columns;
+	private String tableName;
 
+	public DataTable(){}
+	
+	public DataTable(List<Map> list){
+		for (Map map : list) {
+			DataRow row=new DataRow();
+			for (Object key : map.keySet()) {
+				row.put(key.toString(), map.get(key));
+			}
+			this.add(row);
+		}
+	}
+	
 	/**
 	 * 当前对象是否为空或数据条数为0
 	 * 
@@ -49,6 +62,21 @@ public class DataTable extends ArrayList<DataRow> {
 	 */
 	public void setColumns(String[] columns) {
 		this.columns = columns;
+	}
+	
+	/**
+	 * @return 获取 tableName
+	 */
+	public String getTableName() {
+		return tableName;
+	}
+
+	/**
+	 * 设置 tableName
+	 * @param 
+	 */
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
 	/**
