@@ -51,12 +51,9 @@ public class FileUtil {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("resource")
-	public static byte[] ReadAllByte(String url) throws IOException {
-		java.io.File file = new java.io.File(url, "");
-		FileInputStream fis = new FileInputStream(file);
-
-		long len = file.length();
-		byte[] bytes = new byte[(int) len];
+	public static byte[] ReadAllByte(String url) throws IOException {		
+		FileInputStream fis = new FileInputStream(url);
+		byte[] bytes = new byte[fis.available()];
 		fis.read(bytes, 0, bytes.length);
 		fis.close();
 		return bytes;
@@ -77,7 +74,7 @@ public class FileUtil {
 		osw.write(content);
 		osw.close();
 		fos.close();
-		
+
 		/**
 		 * 备忘录,也可以使用FileWriter来实现
 		 */
@@ -160,11 +157,11 @@ public class FileUtil {
 	 * @param fileName 文件全路径
 	 * @return
 	 */
-	public static boolean DeleteFile(String fileName){
-		File file=new File(fileName);
+	public static boolean DeleteFile(String fileName) {
+		File file = new File(fileName);
 		return file.delete();
 	}
-	
+
 	/**
 	 * 查找指定目录下包含关键字的所有文件信息
 	 * 
@@ -330,14 +327,15 @@ public class FileUtil {
 		FileOutputStream out = new FileOutputStream(newFile);
 
 		byte[] buffer = new byte[2097152];
-		while ((in.read(buffer)) != -1) {
-			out.write(buffer);
+		int length;
+		while ((length = in.read(buffer)) != -1) {
+			out.write(buffer, 0, length);
 		}
-		
+
 		in.close();
 		out.close();
 	}
-	
+
 	/**
 	 * 判断文件是否被占用 被占用返回true
 	 * @param file
@@ -350,6 +348,5 @@ public class FileUtil {
 			return true;
 		}
 	}
-
 
 }
