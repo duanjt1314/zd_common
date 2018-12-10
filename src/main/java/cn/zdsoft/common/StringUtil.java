@@ -44,8 +44,9 @@ public class StringUtil {
 
 	/**
 	 * 将字符串转换为Map键值对的集合
-	 * 备注:所有的标头将强制转换为大写
-	 * 
+	 * 备注:
+	 * 1.所有的标头将强制转换为大写
+	 * 2.以第一行作为列头，第一行的字段数必须小于等于后面内容字段数
 	 * @param str
 	 * @return
 	 */
@@ -59,7 +60,7 @@ public class StringUtil {
 		String[] rows = str.split("\r\n");
 		if (rows.length > 0) {
 			// 实例化列
-			String[] cls = rows[0].split("\t");// 第一行代表标题
+			String[] cls = rows[0].split("\t", -1);// 第一行代表标题
 			for (int i = 0; i < cls.length; i++) {
 				if (!IsNullOrEmpty(cls[i].trim().toUpperCase()))
 					columnNames.add(cls[i].trim().toUpperCase());
@@ -68,14 +69,14 @@ public class StringUtil {
 			// 实例化数据
 			for (int i = 1; i < rows.length; i++) {
 				DataRow hash = new DataRow();
-				cls = rows[i].split("\t");
+				cls = rows[i].split("\t", -1);
 				for (int m = 0; m < columnNames.size(); m++) {
 					hash.put(columnNames.get(m), cls[m].trim());
 				}
 				table.add(hash);
 			}
 		}
-		String[] col=new String[columnNames.size()];
+		String[] col = new String[columnNames.size()];
 		columnNames.toArray(col);
 		table.setColumns(col);
 		return table;
