@@ -69,6 +69,20 @@ public class DateUtil {
 	}
 	
 	/**
+	 *  给指定日期增加指定年数，可以是负数
+	 * @param date
+	 * @param year
+	 * @return
+	 */
+	public static Date AddYear(Date date,int year){
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(date);
+		calendar.add(calendar.YEAR, year);
+		date = calendar.getTime(); 
+		return date;
+	}
+	
+	/**
 	 * 将日期字符串按照一定的格式转换为日期对象Date
 	 * @param time
 	 * @param format
